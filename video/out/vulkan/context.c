@@ -180,6 +180,11 @@ bool ra_vk_ctx_init(struct ra_ctx *ctx, struct mpvk_ctx *vk,
         .surface = vk->surface,
         .present_mode = preferred_mode,
         .swapchain_depth = ctx->opts.swapchain_depth,
+#if PL_API_VER >= 29
+        // mpv already handles resize events, so gracefully allow suboptimal
+        // swapchains to exist in order to make resizing even smoother
+        .allow_suboptimal = true,
+#endif
     };
 
     if (p->opts->swap_mode >= 0) // user override
