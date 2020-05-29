@@ -318,7 +318,7 @@ static const struct gl_video_opts gl_video_opts_def = {
     .background = {0, 0, 0, 255},
     .gamma = 1.0f,
     .tone_map = {
-        .curve = TONE_MAPPING_HABLE,
+        .curve = TONE_MAPPING_BT_2390,
         .curve_param = NAN,
         .max_boost = 1.0,
         .decay_rate = 100.0,
@@ -373,7 +373,8 @@ const struct m_sub_options gl_video_conf = {
                     {"reinhard", TONE_MAPPING_REINHARD},
                     {"hable",    TONE_MAPPING_HABLE},
                     {"gamma",    TONE_MAPPING_GAMMA},
-                    {"linear",   TONE_MAPPING_LINEAR})),
+                    {"linear",   TONE_MAPPING_LINEAR},
+                    {"bt.2390",  TONE_MAPPING_BT_2390})),
         OPT_CHOICE("hdr-compute-peak", tone_map.compute_peak, 0,
                    ({"auto", 0},
                     {"yes", 1},
