@@ -135,6 +135,12 @@ def build(ctx):
         ctx.wayland_protocol_header(proto_dir = ctx.env.WL_PROTO_DIR,
             protocol  = "unstable/xdg-decoration/xdg-decoration-unstable-v1",
             target    = "video/out/wayland/xdg-decoration-v1.h")
+        ctx.wayland_protocol_code(proto_dir = ctx.env.WL_PROTO_DIR,
+            protocol  = "stable/presentation-time/presentation-time",
+            target    = "video/out/wayland/presentation-time.c")
+        ctx.wayland_protocol_header(proto_dir = ctx.env.WL_PROTO_DIR,
+            protocol  = "stable/presentation-time/presentation-time",
+            target    = "video/out/wayland/presentation-time.h")
 
     def swift(task):
         src = [x.abspath() for x in task.inputs]

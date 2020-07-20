@@ -35,6 +35,9 @@
 // Generated from xdg-decoration-unstable-v1.xml
 #include "video/out/wayland/xdg-decoration-v1.h"
 
+// Generated from presentation-time.xml
+#include "video/out/wayland/presentation-time.h"
+
 static void xdg_wm_base_ping(void *data, struct xdg_wm_base *wm_base, uint32_t serial)
 {
     xdg_wm_base_pong(wm_base, serial);
