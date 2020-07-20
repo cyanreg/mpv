@@ -194,7 +194,7 @@ static void pointer_handle_axis(void *data, struct wl_pointer *wl_pointer,
     struct vo_wayland_state *wl = data;
     if (wl_fixed_to_double(value) == 0)
         return;
-    double val = wl_fixed_to_double(value)/abs(wl_fixed_to_double(value));
+    double val = wl_fixed_to_double(value)*0.1;
     switch (axis) {
     case WL_POINTER_AXIS_VERTICAL_SCROLL:
         if (value > 0)
