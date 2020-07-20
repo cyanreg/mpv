@@ -136,9 +136,6 @@ def build(ctx):
             protocol  = "unstable/xdg-decoration/xdg-decoration-unstable-v1",
             target    = "video/out/wayland/xdg-decoration-v1.h")
 
-    ctx(features = "ebml_header", target = "ebml_types.h")
-    ctx(features = "ebml_definitions", target = "ebml_defs.c")
-
     def swift(task):
         src = [x.abspath() for x in task.inputs]
         bridge = ctx.path.find_node("osdep/macOS_swift_bridge.h").abspath()
@@ -279,13 +276,10 @@ def build(ctx):
         ( "demux/demux_lavf.c" ),
         ( "demux/demux_libarchive.c",            "libarchive" ),
         ( "demux/demux_mf.c" ),
-        ( "demux/demux_mkv.c" ),
-        ( "demux/demux_mkv_timeline.c" ),
         ( "demux/demux_null.c" ),
         ( "demux/demux_playlist.c" ),
         ( "demux/demux_raw.c" ),
         ( "demux/demux_timeline.c" ),
-        ( "demux/ebml.c" ),
         ( "demux/packet.c" ),
         ( "demux/timeline.c" ),
 

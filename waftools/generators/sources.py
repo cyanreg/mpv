@@ -1,7 +1,6 @@
 from waflib.Build import BuildContext
 from waflib import TaskGen, Utils
 from io import StringIO
-from TOOLS.matroska import generate_C_header, generate_C_definitions
 from TOOLS.file2string import file2string
 import os
 
@@ -40,14 +39,6 @@ def f2s(self):
         src = self.path.find_resource(source)
         file2string(source, iter(src.read().splitlines(True)), out)
     execf(self, fn)
-
-@TaskGen.feature('ebml_header')
-def ebml_header(self):
-    execf(self, generate_C_header)
-
-@TaskGen.feature('ebml_definitions')
-def ebml_definitions(self):
-    execf(self, generate_C_definitions)
 
 def __zshcomp__(ctx, **kwargs):
     ctx(
