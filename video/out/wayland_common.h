@@ -56,6 +56,7 @@ struct vo_wayland_state {
     bool fullscreen;
     bool maximized;
     bool configured;
+    bool state_changed;
     int wakeup_pipe[2];
     int pending_vo_events;
     int mouse_x;

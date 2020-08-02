@@ -140,7 +140,10 @@ static void pointer_handle_motion(void *data, struct wl_pointer *pointer,
     wl->mouse_x = wl_fixed_to_int(sx) * wl->scaling;
     wl->mouse_y = wl_fixed_to_int(sy) * wl->scaling;
 
-    mp_input_set_mouse_pos(wl->vo->input_ctx, wl->mouse_x, wl->mouse_y);
+    if (!wl->state_changed) {
+        mp_input_set_mouse_pos(wl->vo->input_ctx, wl->mouse_x, wl->mouse_y);
+    }
+    wl->state_changed = false;
 }
 
 static void window_move(struct vo_wayland_state *wl, uint32_t serial)
@@ -985,6 +988,7 @@ static void handle_toplevel_config(void *data, struct xdg_toplevel *toplevel,
                mp_rect_w(wl->geometry)*wl->scaling, mp_rect_h(wl->geometry)*wl->scaling);
 
     wl->pending_vo_events |= VO_EVENT_RESIZE;
+    wl->state_changed = true;
 }
 
 static void handle_toplevel_close(void *data, struct xdg_toplevel *xdg_toplevel)
