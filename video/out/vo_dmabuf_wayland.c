@@ -596,12 +596,6 @@ static bool draw_frame(struct vo *vo, struct vo_frame *frame)
     struct osd_buffer *osd_buf;
     double pts;
 
-    if (!vo_wayland_check_visible(vo)) {
-        if (frame->current)
-            talloc_free(frame);
-        return VO_FALSE;
-    }
-
     if (p->destroy_buffers)
         destroy_buffers(vo);
 
@@ -648,9 +642,6 @@ static void flip_page(struct vo *vo)
     wl_surface_commit(wl->osd_surface);
     wl_surface_commit(wl->video_surface);
     wl_surface_commit(wl->surface);
-
-    if (wl->opts->wl_internal_vsync)
-        vo_wayland_wait_frame(wl);
 
     if (wl->use_present)
         present_sync_swap(wl->present);

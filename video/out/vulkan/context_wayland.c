@@ -28,18 +28,9 @@ struct priv {
     bool use_fifo;
 };
 
-static bool wayland_vk_check_visible(struct ra_ctx *ctx)
-{
-    return vo_wayland_check_visible(ctx->vo);
-}
-
 static void wayland_vk_swap_buffers(struct ra_ctx *ctx)
 {
     struct vo_wayland_state *wl = ctx->vo->wl;
-    struct priv *p = ctx->priv;
-
-    if ((!p->use_fifo && wl->opts->wl_internal_vsync == 1) || wl->opts->wl_internal_vsync == 2)
-        vo_wayland_wait_frame(wl);
 
     if (wl->use_present)
         present_sync_swap(wl->present);
@@ -80,7 +71,6 @@ static bool wayland_vk_init(struct ra_ctx *ctx)
     };
 
     struct ra_ctx_params params = {
-        .check_visible = wayland_vk_check_visible,
         .swap_buffers = wayland_vk_swap_buffers,
         .get_vsync = wayland_vk_get_vsync,
     };
